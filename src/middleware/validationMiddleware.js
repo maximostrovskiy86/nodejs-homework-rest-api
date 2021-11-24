@@ -39,6 +39,7 @@ export const updateUserValidation = (req, res, next) => {
             .min(3)
             .max(20)
             .optional(),
+        favorite: Joi.boolean().default(false),
     });
 
     const validationResult = schema.validate(req.body);
