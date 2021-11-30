@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
             maxlength: 30,
             unique: true,
         },
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'users'
+        },
         phone: {
             type: String,
             minlength: 3,

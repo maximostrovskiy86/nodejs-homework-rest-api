@@ -6,16 +6,20 @@ import {
     deleteUserById,
     updateStatusContact
 } from "../services/contactsService.js";
+// import customError from "../helpers/error.js";
 
 export const getUsersController = async (req, res, next) => {
-    const contacts = await getUsers();
+    const {id: owner} = req.user;
+
+    const contacts = await getUsers(owner);
+    console.log(req.user)
     res.json({contacts});
 }
 
 export const getUserByIdController = async (req, res, next) => {
 
     const {id} = req.params;
-    const contact = await getUserById(id)
+    const contact = await getUserById(id);
 
     if (contact) {
         res.json({
@@ -31,11 +35,16 @@ export const getUserByIdController = async (req, res, next) => {
             data: 'Not Found',
         });
     }
+
+    // if (!contact) {
+    //     throw new WrongParametersError (`Not found task id: ${id}`);
+    // }
 }
 
 export const addUserController = async (req, res, next) => {
     const {name, email, phone, favorite} = req.body;
-    const contact = await addUser({name, email, phone, favorite});
+    const {id} = req.user;
+    const contact = await addUser({name, email, phone, favorite}, id);
     console.log(contact)
 
     res.json({

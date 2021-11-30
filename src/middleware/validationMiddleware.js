@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import customError  from "../helpers/error.js"
 
 export const addUserValidation = (req, res, next) => {
     const schema = Joi.object({
@@ -45,7 +46,7 @@ export const updateUserValidation = (req, res, next) => {
     const validationResult = schema.validate(req.body);
 
     if (validationResult.error) {
-        return res.status(400).json({status: validationResult.error.details});
+        next(new customError.ValidationError(validationResult.error.details));
     }
 
     next();
