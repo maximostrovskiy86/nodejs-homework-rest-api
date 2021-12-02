@@ -8,7 +8,6 @@ export const registration = async ({email, password}) => {
         email,
         password
     });
-    // return user;
 };
 
 export const login = async (email, password) => {
@@ -21,12 +20,10 @@ export const login = async (email, password) => {
     if (!await bcrypt.compare(password, user.password)) {
         throw new customError.NotAuthorizedError(`Wrong password`)
     }
-    const token = jwt.sign({
+
+    return jwt.sign({
         id: user._id,
         createdAt: user.createdAt,
     }, process.env.JWT_SECRET);
-    // }, secret);
-
-    return token;
 
 };

@@ -5,8 +5,7 @@ import {
     updateUserById,
     deleteUserById,
     updateStatusContact
-} from "../services/contactsService.js";
-// import customError from "../helpers/error.js";
+} from "../services/contactService.js";
 
 export const getUsersController = async (req, res, next) => {
     const {id: owner} = req.user;
@@ -35,10 +34,6 @@ export const getUserByIdController = async (req, res, next) => {
             data: 'Not Found',
         });
     }
-
-    // if (!contact) {
-    //     throw new WrongParametersError (`Not found task id: ${id}`);
-    // }
 }
 
 export const addUserController = async (req, res, next) => {
@@ -103,4 +98,5 @@ export const  updateStatusContactController = async (req, res, next) => {
         contactUpdate
     })
 }
+
 

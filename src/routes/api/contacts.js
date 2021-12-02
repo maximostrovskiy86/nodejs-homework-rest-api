@@ -8,7 +8,7 @@ import {
     updateUserByIdController,
     deleteUserByIdController,
     updateStatusContactController
-} from "../../controllers/userController.js";
+} from "../../controllers/contactController.js";
 import {addUserValidation, updateUserValidation} from "../../middleware/validationMiddleware.js";
 
 export const contactRouter = new express.Router();

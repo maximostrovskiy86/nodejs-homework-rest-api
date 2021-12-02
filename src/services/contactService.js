@@ -1,4 +1,4 @@
-import Contact from "../db/contactModel.js"
+import Contact from "../db/contactModel.js";
 
 export const getUsers = async (owner) => {
     const contacts = await Contact.find({owner});
