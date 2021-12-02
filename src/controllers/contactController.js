@@ -36,9 +36,6 @@ export const getUserByIdController = async (req, res, next) => {
         });
     }
 
-    // if (!contact) {
-    //     throw new WrongParametersError (`Not found task id: ${id}`);
-    // }
 }
 
 export const addUserController = async (req, res, next) => {

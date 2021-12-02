@@ -3,13 +3,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import customError from "../helpers/error.js";
 
-export const registration = async ({email, password}) => {
-    return await User.create({
-        email,
-        password
-    });
-    // return user;
-};
+// export const registration = async ({email, password}) => {
+//     return await User.create({
+//         email,
+//         password
+//     });
+// };
 
 export const login = async (email, password) => {
     const user = await User.findOne({email, confirmed: true});
@@ -21,12 +20,11 @@ export const login = async (email, password) => {
     if (!await bcrypt.compare(password, user.password)) {
         throw new customError.NotAuthorizedError(`Wrong password`)
     }
-    const token = jwt.sign({
+
+    return jwt.sign({
         id: user._id,
         createdAt: user.createdAt,
     }, process.env.JWT_SECRET);
-    // }, secret);
 
-    return token;
 
 };

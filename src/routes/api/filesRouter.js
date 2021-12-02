@@ -6,6 +6,7 @@ import {asyncWrapper} from '../../helpers/apiHelpers.js';
 import {uploadController} from '../../controllers/filesController.js';
 
 const FILE_DIR = path.resolve('./tmp');
+console.log('FILE_DIR:', FILE_DIR)
 
 const filesRouter = new express.Router();
 

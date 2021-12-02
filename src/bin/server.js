@@ -22,13 +22,3 @@ const start = async () => {
 
 start();
 
-// app.listen(PORT, async () => {
-
-// try {
-// await connectMongo();
-// if (error) console.error('Error at server launch', error);
-// console.log(`Server running. Use our API on port: ${PORT}`);
-// } catch (error) {
-//     console.error(`Errrrrooor, ${error.message}`)
-// }
-// });
