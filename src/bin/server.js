@@ -1,11 +1,10 @@
 import app from '../app.js';
 import {connectMongo} from "../db/connection.js";
+import dotenv from 'dotenv';
 
-// import d from "dotenv/config"
+dotenv.config();
 
-// import ("dotenv").config();
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 
 const start = async () => {
@@ -13,7 +12,7 @@ const start = async () => {
         await connectMongo();
 
         app.listen(PORT, (err) => {
-            if (err) console.error('Error at aserver launch:', err);
+            if (err) console.error('Error at server launch:', err);
             console.log(`Server works at port ${PORT}!`);
         });
     } catch (err) {
@@ -24,10 +23,12 @@ const start = async () => {
 start();
 
 // app.listen(PORT, async () => {
-    // try {
-        // if (error) console.error('Error at server launch', error);
-        // console.log(`Server running. Use our API on port: ${PORT}`);
-    // } catch (error) {
-    //     console.error(`Errrrrooor, ${error.message}`)
-    // }
+
+// try {
+// await connectMongo();
+// if (error) console.error('Error at server launch', error);
+// console.log(`Server running. Use our API on port: ${PORT}`);
+// } catch (error) {
+//     console.error(`Errrrrooor, ${error.message}`)
+// }
 // });

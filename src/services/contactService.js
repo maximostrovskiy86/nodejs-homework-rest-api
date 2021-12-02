@@ -1,17 +1,17 @@
-import Contact from "../db/postModel.js"
+import Contact from "../db/contactModel.js";
 
-export const getUsers = async () => {
-    const contacts = await Contact.find({});
+export const getUsers = async (owner) => {
+    const contacts = await Contact.find({owner});
     return contacts;
 };
 
 export const getUserById = async (id) => {
-    const contact = await Contact.findById(id)
+    const contact = await Contact.findById(id);
     return contact;
 };
 
-export const addUser = async ({name, email, phone, favorite}) => {
-    const contact = await Contact.create({name, email, phone, favorite})
+export const addUser = async ({name, email, phone, favorite}, owner) => {
+    const contact = await Contact.create({name, email, phone, favorite, owner})
     console.log(contact)
     return contact;
 };
