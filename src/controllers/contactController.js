@@ -6,7 +6,6 @@ import {
     deleteUserById,
     updateStatusContact
 } from "../services/contactsService.js";
-// import customError from "../helpers/error.js";
 
 export const getUsersController = async (req, res, next) => {
     const {id: owner} = req.user;
@@ -78,7 +77,7 @@ export const deleteUserByIdController = async (req, res, next) => {
     })
 }
 
-export const  updateStatusContactController = async (req, res, next) => {
+export const updateStatusContactController = async (req, res, next) => {
     const {id} = req.params;
     const {favorite} = req.body;
 
@@ -86,7 +85,7 @@ export const  updateStatusContactController = async (req, res, next) => {
         return res.status(400).json({"message": "missing field favorite"});
     }
 
-    const contactUpdate = await updateStatusContact(id,  { favorite });
+    const contactUpdate = await updateStatusContact(id, {favorite});
 
     if (!contactUpdate) {
         return res.status(404).json({

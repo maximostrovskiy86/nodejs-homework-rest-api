@@ -6,7 +6,6 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 
-
 const start = async () => {
     try {
         await connectMongo();

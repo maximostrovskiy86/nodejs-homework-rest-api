@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import customError  from "../helpers/error.js"
+import customError from "../helpers/error.js"
 
 export const addUserValidation = (req, res, next) => {
     const schema = Joi.object({
@@ -9,7 +9,7 @@ export const addUserValidation = (req, res, next) => {
             .max(30)
             .required(),
         email: Joi.string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+            .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
             .required(),
         phone: Joi.string()
             .min(3)
@@ -20,7 +20,7 @@ export const addUserValidation = (req, res, next) => {
     const validationResult = schema.validate(req.body);
 
     if (validationResult.error) {
-       return res.status(400).json({status: validationResult.error.details});
+        return res.status(400).json({status: validationResult.error.details});
     }
 
     next();
@@ -34,7 +34,7 @@ export const updateUserValidation = (req, res, next) => {
             .max(30)
             .optional(),
         email: Joi.string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+            .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
             .optional(),
         phone: Joi.string()
             .min(3)
