@@ -5,7 +5,7 @@ import {
     updateUserById,
     deleteUserById,
     updateStatusContact
-} from "../services/contactsService.js";
+} from "../services/contactService.js";
 
 export const getUsersController = async (req, res, next) => {
     const {id: owner} = req.user;

@@ -13,7 +13,7 @@ import {addUserValidation, updateUserValidation} from "../../middleware/validati
 
 export const contactRouter = new express.Router();
 
-contactRouter.use(authMiddleware)
+contactRouter.use(authMiddleware);
 
 contactRouter.get('/', asyncWrapper(getUsersController));
 contactRouter.get('/:id', asyncWrapper(getUserByIdController));

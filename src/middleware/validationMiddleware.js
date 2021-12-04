@@ -1,17 +1,17 @@
-import Joi from 'joi';
+import joi from 'joi';
 import customError from "../helpers/error.js"
 
 export const addUserValidation = (req, res, next) => {
-    const schema = Joi.object({
-        name: Joi.string()
+    const schema = joi.object({
+        name: joi.string()
             .alphanum()
             .min(3)
             .max(30)
             .required(),
-        email: Joi.string()
+        email: joi.string()
             .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
             .required(),
-        phone: Joi.string()
+        phone: joi.string()
             .min(3)
             .max(20)
             .required(),
@@ -27,20 +27,20 @@ export const addUserValidation = (req, res, next) => {
 }
 
 export const updateUserValidation = (req, res, next) => {
-    const schema = Joi.object({
-        name: Joi.string()
+    const schema = joi.object({
+        name: joi.string()
             .alphanum()
             .min(3)
             .max(30)
             .optional(),
-        email: Joi.string()
+        email: joi.string()
             .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
             .optional(),
-        phone: Joi.string()
+        phone: joi.string()
             .min(3)
             .max(20)
             .optional(),
-        favorite: Joi.boolean().default(false),
+        favorite: joi.boolean().default(false),
     });
 
     const validationResult = schema.validate(req.body);
@@ -51,4 +51,19 @@ export const updateUserValidation = (req, res, next) => {
 
     next();
 }
+
+export const userEmailValidation = (req, res, next) => {
+    const schema = joi.object({
+        email: joi.string().email().required(),
+    });
+
+    const validationResult = schema.validate(req.body);
+
+    if (validationResult.error) {
+        next(new customError.ValidationError(validationResult.error.details));
+    }
+
+    next();
+}
+
 
