@@ -1,4 +1,4 @@
-import  customError from "./error.js";
+import customError from "./error.js";
 
 export const asyncWrapper = (controller) => {
     return (req, res, next) => {
