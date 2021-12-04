@@ -3,8 +3,8 @@ import customError from '../helpers/error.js';
 
 const authMiddleware = (req, res, next) => {
     try {
-
         const {authorization} = req.headers;
+
         if (!authorization) {
             next(new customError.NotAuthorizedError('Please, provide a token in request authorization header'));
         }

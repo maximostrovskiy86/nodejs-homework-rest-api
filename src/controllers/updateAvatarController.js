@@ -1,11 +1,11 @@
 import fs from 'fs/promises';
 import path from 'path';
 import Jimp from 'jimp';
-import User from "../db/userModal.js";
+import User from "../db/userModel.js";
 
 const AVATAR_DIR = path.resolve('./src/public/avatars');
 
-export const updateAvatarController = async (req, res, next) => {
+export const updateAvatarController = async (req, res, _) => {
     const userId = req.user._id.toString();
     const {path: tempPath, originalname} = req.file;
     const uploadPath = path.join(AVATAR_DIR, userId, originalname);

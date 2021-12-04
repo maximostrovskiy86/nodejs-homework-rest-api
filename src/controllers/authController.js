@@ -1,11 +1,23 @@
-import { login} from "../services/authService.js";
+import {login} from "../services/authService.js";
 import bcrypt from "bcrypt";
 import gravatar from "gravatar";
 import {v4} from "uuid";
-import User from "../db/userModal.js";
+import User from "../db/userModel.js";
+import {sendEmail} from "../utils/sendEmail.js";
+
 
 export const registrationController = async (req, res) => {
     const {email, password} = req.body;
+
+    const user = await User.findOne({email})
+
+    if (user) {
+        return res.status(409).json({
+            status: 'error',
+            code: 409,
+            message: 'Already exist'
+        })
+    }
 
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const defaultAvatar = gravatar.url(email, {protocol: 'https', s: '250'});
@@ -17,6 +29,16 @@ export const registrationController = async (req, res) => {
         avatarURL: defaultAvatar,
         verifyToken,
     });
+
+    const msg = {
+        to: email,
+        from: 'slon.2786@gmail.com',
+        subject: 'Thank you for registration!',
+        text: `Please, confirm your email address http://localhost:3000/api/auth/verify/${verifyToken}`,
+        html: `<a href="http://localhost:3000/api/auth/verify/${verifyToken}">Please, confirm your email address</a>`,
+    };
+
+    sendEmail(msg);
 
     res.json({
         status: '201 Created',

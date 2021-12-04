@@ -1,7 +1,7 @@
-import User from "../db/userModal.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import customError from "../helpers/error.js";
+import User from "../db/userModel.js";
 
 export const login = async (email, password) => {
     const user = await User.findOne({email, confirmed: true});
